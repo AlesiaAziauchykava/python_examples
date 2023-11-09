@@ -1,0 +1,52 @@
+h3 {
+    font-weight: bold;
+    vertical-align: center;
+    text-align: center;
+}
+
+table {
+    border: 1px solid grey;
+    vertical-align: top;
+    background-color:lightblue;
+    color:black;
+    width: 100%;
+ }
+
+ th {
+    background-color:lightskyblue;
+    border: 1px solid grey;
+ }
+
+ td {
+    vertical-align: top;
+    text-align: left;
+    border: 1px solid grey;
+ }
+
+ div.form-group-row {
+   padding: 10px 0px 10px;
+ }
+
+ div.data-zen-title {
+  width:100%;
+}
+
+ div.data-zen {
+   display: inline-flex;
+ }
+
+ div.data-zen h3 {
+   margin: 20px 0px 20px 20px;
+   color:rgb(53, 97, 191);
+   font-size: 25px;
+   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ }
+
+
+ div button {
+   margin: 0px 0px 10px 0px;
+ }
+
+ div.error{
+  color: red;
+ }

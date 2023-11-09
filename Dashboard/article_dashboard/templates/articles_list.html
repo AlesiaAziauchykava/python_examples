@@ -1,0 +1,84 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Articles</title>  
+     {% load static %}  
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>  
+</head>  
+<body>  
+    <div class="data-zen-title">
+        <img src="/static/img/data-zen-title.jpg" alt="Data Zen News Bot title" width="100%"/>
+    </div>
+    <div class="data-zen">
+        <img src="/static/img/data-zen.png" alt="Data Zen News Bot" width="75"/>
+        <h3>
+            LIST OF ARTICLES WITH SUMMARIES
+        </h3>
+    </div>
+    <form method="GET" class="get-form">
+        <div class="error">{{ form.non_field_errors }}</div>
+        <p>Filter date:</p>
+        <div class="filter">         
+            <label for="date_from">from</label>
+            <input type="date" id="date_from" name="date_from" value="{{ date_from }}">
+        </div>
+        <div class="filter">
+            <label for="date_to">to</label>
+            <input type="date" id="date_to" name="date_to" value="{{ date_to }}">
+        </div>
+        <div class="submit">
+            <button type="submit">Submit</button>
+        </div>
+        <table>  
+            <thead>  
+            <tr>  
+                <th>Title</th>  
+                <th>Content</th>  
+                <th>Published date</th>  
+                <th>Author</th>  
+                <th>Link to source</th> 
+                <th>Summaries</th>  
+            </tr>  
+            </thead>  
+            <tbody>  
+        {% for article in articles %}  
+            <tr>  
+                <td>{{ article.title }}</td>  
+                <td>{{ article.content }}</td>  
+                <td>{{ article.published_date }}</td>  
+                <td>{{ article.author }}</td> 
+                <td><a href="{{ article.url }}">link</a></td>
+                
+                <td>
+                    <table>
+                        <tbody>
+                            <thead>  
+                                <tr>  
+                                    <th>Summary</th>  
+                                    <th>Generated date</th>  
+                                    <th>Bad flag</th>  
+                                </tr>  
+                            </thead>
+                        {% for summary in article.summaries_set.all %} 
+                            <tr>
+                                <td>{{ summary.summary }}</td>
+                                <td>{{ summary.generated_date }}</td>
+                                <td>  
+                                    <div>
+                                        <input type="checkbox" id="bad_summary" name="bad_summary" onclick="return false;" {% if summary.is_bad == 1 %} checked {% endif %}/>
+                                    </div>
+                                    <a href="/summary_edit/{{ summary.id }}"><span class="glyphicon glyphicon-pencil" >{% if summary.is_bad == 1 %} Mark good summary {% else %} Mark Bad summary {% endif %}</span></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </td>
+            </tr>  
+        {% endfor %}  
+            </tbody>  
+        </table>  
+    </form>
+</body>  
+</html>  

@@ -1,0 +1,38 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Edit</title>  
+    {% load static %}  
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>  
+</head>  
+<body>  
+<form method="POST" class="post-form" action="/summary_update/{{summary.id}}">  
+    
+    {% csrf_token %} 
+
+    <h3>Update bad flag for summary:</h3>   
+
+    <input type="hidden" name="id" id="sid" value="{{ summary.id }}"/>
+
+    <input type="hidden" name="article" id="aid" value="{{ summary.article.id }}"/>
+
+    <div class="form-group-row">
+        <textarea rows="20" cols="120" name="summary" id="summary" placeholder="Summary" readonly>
+            {{ summary.summary }}
+        </textarea>
+    </div>
+    <div class="form-group-row"> 
+        <label for="generated_date">Generated date</label>
+        <input type="text" name="generated_date" id="generated_date" value="{{ summary.generated_date }}" readonly/>
+    </div>
+    <div class="form-group-row">  
+        <input type="checkbox" name="is_bad" id="is_bad" {% if summary.is_bad == 1 %} checked {% endif %}/>
+        <label for="is_bad">Bad summary</label>
+    </div>  
+    </div class="form-group-row">   
+        <button type="submit">Update</button>
+    </div>  
+</form>  
+</body>  
+</html>  
